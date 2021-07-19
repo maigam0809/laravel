@@ -14,6 +14,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'gender',
+        'role',
     ];
     protected $hidden = [
         'password',
@@ -25,4 +28,9 @@ class User extends Authenticatable
 
 
     // code thêm sửa xoá và lấy dữ liệu
+     // chỉ định tên table trong trường hợp không đặt tên theo quy tắc của Eloquent
+     protected $table = 'users';
+
+     // Mặc định . eloquents coi cái primary key là cột id
+     protected $primariKey = 'id';
 }

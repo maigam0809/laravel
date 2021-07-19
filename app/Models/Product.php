@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    // chỉ định tên table trong trường hợp không đặt tên theo quy tắc của Eloquent
+    protected $table = 'products';
+
+    // Mặc định . eloquents coi cái primary key là cột id
+    protected $primariKey = 'id';
 }

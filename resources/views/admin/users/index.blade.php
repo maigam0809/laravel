@@ -64,7 +64,7 @@ Quản lí users
                         <div class="modal-footer">
                             <form action="{{route('admin.users.delete',['id'=> $item->id])}}" method="post">
                                 @csrf
-                                <button type="button" class="btn btn-primary">Yes</button>
+                                <button type="submit" class="btn btn-primary">Yes</button>
                             </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                         </div>
