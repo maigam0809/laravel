@@ -1,72 +1,87 @@
 @extends('layout')
 
-@section('title')
-Quản lí categories
-
-@endsection
-
+@section('title','List Categories')
 @section('contents')
-@if(!empty($data))
+@if(!empty($categories))
 
-<table class="table">
-    <div class="row">
-        <div class="col-5">
-            <a href="{{route('admin.users.create')}}" class="btn btn-success">Create</a>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Categories
+                    <small>List</small>
+                </h1>
+            </div>
+            <div class="col-lg-12">
 
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
+            </div>
+               <!-- /.col-lg-12 -->
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr align="center">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($categories as $item)
+                    <tr class="odd gradeX text-capitalize" align="center">
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->name}}</td>
+                        <td class="center">
+                            <i class="fa fa-pencil fa-fw"></i>
+                            <a href="{{route('admin.categories.edit',['category'=>$item->id])}}">Edit</a>
+                        </td>
+
+                        <td>
+                            <i class="fa fa-trash-o  fa-fw"></i>
+                            <a type="button"  data-toggle="modal" data-target="#confirm_delete_{{$item->id}}">
+                            xoá
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirm_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có thực sự muốn xoá hay không
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{route('admin.categories.delete',['category'=> $item->id])}}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            {{-- end modal --}}
+                        </td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+            @else
+                <h2>Không có dữ liệu</h2>
+            @endif
         </div>
     </div>
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Action</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($data as $item)
-          <tr>
-            <th scope="row">{{$item->id}}</th>
-            <td>{{$item->name}}</td>
-            <td>
-                <a href="{{route('admin.users.edit',['id'=>$item->id])}}" class="btn btn-primary">Sửa</a>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete_{{$item->id}}">
-                 xoá
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="confirm_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                            Bạn có thực sự muốn xoá hay không
-                        </div>
-                        <div class="modal-footer">
-                            <form action="{{route('admin.users.delete',['id'=> $item->id])}}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Yes</button>
-                            </form>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {{-- end modal --}}
-            </td>
-          </tr>
-        @endforeach
-
-        </tbody>
-      </table>
-@else
-      <h2>Không có dữ liệu</h2>
-@endif
+</div>
 
 @endsection

@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-     // chỉ định tên table trong trường hợp không đặt tên theo quy tắc của Eloquent
-     protected $table = 'categories';
+    protected $fillable = [
+        'name',
+    ];
+    protected $table = 'categories';
+    protected $primariKey = 'id';
+    public function product(){
+        return $this->hasMany(Product::class,'category_id','id');
 
-     // Mặc định . eloquents coi cái primary key là cột id
-     protected $primariKey = 'id';
+    }
+
+
 }
