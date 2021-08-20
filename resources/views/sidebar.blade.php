@@ -41,6 +41,19 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+
+            <li>
+                <a href="{{route('admin.invoices.index')}}"><i class="fa fa-shopping-cart fa-fw"></i> Invoices<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{route('admin.invoices.index')}}">List Invoices</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.invoices.create')}}">Add Invoices</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
             <li>
                 <a href="{{route('admin.users.create')}}"><i class="fa fa-users fa-fw"></i>Users<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

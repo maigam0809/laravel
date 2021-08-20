@@ -6,11 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Invoice;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'email',
@@ -38,7 +41,7 @@ class User extends Authenticatable
     }
 
     //  Mutator: set(AttributeName) Attribute
-    public function setPasswordAtribute($value){
+    public function setPasswordAttribute($value){
         $hashed = bcrypt($value);
         $this->attributes['password'] = $hashed;
     }

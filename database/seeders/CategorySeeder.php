@@ -16,8 +16,8 @@ class CategorySeeder extends Seeder
             $data =[
                 'name' => $faker->name,
             ];
+            DB::table('categories')->insert($data);
         }
 
-        DB::table('categories')->insert($data);
     }
 }

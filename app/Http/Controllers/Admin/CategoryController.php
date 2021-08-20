@@ -10,6 +10,9 @@ class CategoryController extends Controller
 {
     public function index(){
         $listCate = Category::all();
+        $listCate->load('products');
+        $categories = $listCate->first();
+
         return view('admin/categories/index',[
             'categories'=>$listCate,
         ]);
@@ -17,7 +20,7 @@ class CategoryController extends Controller
 
     public function show(Category $category){
         return view('admin/categories/show',[
-            'user'=>$user,
+            'category'=>$category,
         ]);
     }
 

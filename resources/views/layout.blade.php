@@ -36,7 +36,12 @@
     <div id="wrapper">
 
         <!-- Navigation -->
+        {{-- @if(auth()->check() === true)
+            @endif --}}
+        @auth
         @include('header')
+
+        @endauth
 
         <!-- Page Content -->
         @yield('contents')
@@ -72,7 +77,9 @@
     </script>
     <script type="text/javascript" language="javascript" src="admin_asset/ckeditor/ckeditor.js" ></script>
 
-    @yield('script')
+    {{-- @yield('script') --}}
+
+    @stack('script')
 </body>
 
 </html>

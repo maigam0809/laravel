@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title','List Categories')
+@section('title','List Invoices')
 @section('contents')
 @if(!empty($categories))
 
@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Categories
+                <h1 class="page-header">Invoices
                     <small>List</small>
                 </h1>
             </div>
@@ -27,7 +27,6 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Count Products</th>
                         <th>Action</th>
                         <th>Action</th>
                     </tr>
@@ -37,10 +36,7 @@
                     @foreach ($categories as $item)
                     <tr class="odd gradeX text-capitalize" align="center">
                         <td>{{$item->id}}</td>
-                        <td>
-                            <a href="{{route('admin.categories.show',['category'=>$item->id])}}">{{$item->name}}</a>
-                        </td>
-                        <td>{{$item->products->count()}}</td>
+                        <td>{{$item->name}}</td>
                         <td class="center">
                             <i class="fa fa-pencil fa-fw"></i>
                             <a href="{{route('admin.categories.edit',['category'=>$item->id])}}">Edit</a>

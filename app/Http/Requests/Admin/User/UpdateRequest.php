@@ -3,21 +3,26 @@
 namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-class StoreRequest extends FormRequest
+use App\Rules\RuleEmailUnique;
+class UpdateRequest extends FormRequest
 {
+
     public function authorize()
     {
         return true;
     }
 
+
     public function rules()
     {
         return [
             'name' =>'required|min:3|max:100',
-            'email' =>'required|email|unique:users,email',
-            'password' =>'required|min:8|max:100',
+            'email' =>[
+
+                'required',
+                'email',
+                new RuleEmailUnique(),
+            ],
             'address' =>'required|min:8',
             'role'=>'required|in:' . implode(',',config('common.users.role')),
             'gender'=>'required|in:' . implode(',',config('common.users.gender')),
@@ -40,12 +45,10 @@ class StoreRequest extends FormRequest
         return [
             'name' =>"Họ Tên ",
             'email' =>"Email",
-            'password' =>"Password",
             'address' =>"Address",
             'role' =>"Tài khoản",
             'gender' =>"Giới tính",
 
         ];
     }
-
 }

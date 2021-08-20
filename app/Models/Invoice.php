@@ -23,7 +23,7 @@ class Invoice extends Model
         return $this->hasMany(IvoiceDetail::class, 'invoice_id', 'id');
     }
 
-    public function getTotalPriceAtribute(){
+    public function getTotalPriceAttribute(){
         $newValue = $this->attribute['total_price']."VND";
         return $newValue;
 
